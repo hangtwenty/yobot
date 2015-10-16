@@ -7,6 +7,9 @@ import json
 import pprint
 import urllib
 
+import requests
+import slacker
+
 HOST = 'slack.com'
 BASE_URL = '/api/'
 
@@ -37,14 +40,9 @@ def call_slack(slack_api_method, slack_api_arguments):
     working_arguments = SLACK_API_ARGUMENTS_DEFAULT.copy()
     working_arguments.update(slack_api_arguments.copy())
     slack_api_arguments = working_arguments
-    query_params_str = urllib.urlencode(slack_api_arguments)
-    assert u"#" not in query_params_str, "Expected '#' to be escaped to '%23'"
-    conn = httplib.HTTPSConnection(HOST)
-    relative_url = BASE_URL + slack_api_method + "?" + query_params_str
-    print "About to request, " + relative_url
-    conn.request('GET', relative_url)
-    http_response = conn.getresponse()
-    return json.load(http_response)
+    relative_url = BASE_URL + slack_api_method
+    response = requests.get("https://" + HOST + relative_url, params=slack_api_arguments)
+    return response.json
 
 
 def lambda_handler(event, context):
@@ -72,23 +70,27 @@ def lambda_handler(event, context):
     print("Received response from Slack: " + pprint.pformat(api_response, indent=2))
     return api_response
 
-if __name__ == "__main__":
-    # for manual testing on my laptop
+def always_failed_handler(event, context):
+    raise Exception('I failed!')
 
-    import os
-    my_event = {
-        "slack_api_method": "chat.postMessage",
-        "slack_api_arguments": {
-            "token" : os.environ["CHUMMYBOT_API_TOKEN"],
-            "channel": "#friendlybotisfriendly",
-            "as_user": "friendlybot",
-            "text": "Hello from a Python script"
-        }
-    }
-    # response = lambda_handler(my_event, {})
 
-    import requests
-    requests.post(
-        os.environ['CHUMMYBOT_API_GATEWAY_URL'])
-
+# if __name__ == "__main__":
+#     # for manual testing on my laptop
+#
+#     import os
+#     my_event = {
+#         "slack_api_method": "chat.postMessage",
+#         "slack_api_arguments": {
+#             "token" : os.environ["CHUMMYBOT_API_TOKEN"],
+#             "channel": "#friendlybotisfriendly",
+#             "as_user": "friendlybot",
+#             "text": "Hello from a Python script"
+#         }
+#     }
+#     # response = lambda_handler(my_event, {})
+#
+#     import requests
+#     requests.post(
+#         os.environ['CHUMMYBOT_API_GATEWAY_URL'])
+#
 
