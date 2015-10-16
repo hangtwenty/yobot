@@ -4,11 +4,11 @@ chummybot introduces people to each other in Slack.
 It can make connections across departments or geographies in your growing company.
 
 It pseudo-randomly pairs individuals - without repeats,
-like [etsy/mixer][0].
+like [etsy/mixer][1].
 
-# Why not [etsy/mixer][0]?
+# Why not [etsy/mixer][1]?
 
-[etsy/mixer][0] is an awesome idea. I liked everything about it except that it uses email.
+[etsy/mixer][1] is an awesome idea. I liked everything about it except that it uses email.
 I can think of many coworkers who would ignore another email, but they'd be fine with a chat message.
 Since I already had to write a new thing to use chat instead of email,
 I decided to use 
@@ -17,7 +17,7 @@ Slack was a sensible choice for me, as my company uses Slack, and Slack has grea
 If you like the idea but don't use Slack, I'll bet your (modern) chat service has the same features,
 so it wouldn't be hard to port chummybot!
 
-# Differences from [etsy/mixer][0]
+# Differences from [etsy/mixer][1]
 
 * Use Slack's [user list](https://api.slack.com/methods/users.list) as a directory of employees,
 so there is no need to access the company's [directory service](https://en.wikipedia.org/wiki/Directory_service)
