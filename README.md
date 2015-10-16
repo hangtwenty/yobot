@@ -3,12 +3,13 @@
 chummybot introduces people to each other in Slack. 
 It can make connections across departments or geographies in your growing company.
 
-It pseudo-randomly pairs individuals - without repeats,
-like [etsy/mixer][1].
-
 # Why not [etsy/mixer][1]?
 
-[etsy/mixer][1] is an awesome idea. I liked everything about it except that it uses email.
+[etsy/mixer][1] is an awesome idea:
+
+> [Mixer is] a simple web app that allows people to join a group and then get randomly paired with another member of that group. It then prompts you to meet each other for a coffee, lunch, or a drink after work.  [If you're not both in the same place,] just hop on a video chat.  This encourages people who may not work in the same place to stay in touch and find out what’s going on in each other’s day to day.  The tool keeps a history of the pairings and attempts to match you with someone unique each week; it’s possible to opt in or out of the program at any time.
+
+I liked everything about it except that it uses email.
 I can think of many coworkers who would ignore another email, but they'd be fine with a chat message.
 Since I already had to write a new thing to use chat instead of email,
 I decided to use 
