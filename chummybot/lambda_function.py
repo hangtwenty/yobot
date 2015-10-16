@@ -2,12 +2,12 @@
 # -*- coding: utf-8 -*-
 """ Translates from AWS Lambda event to Slack call.
 """
-import httplib
 import json
+import os
 import pprint
-import urllib
+import re
 
-import requests
+from funcy import merge
 import slacker
 
 HOST = 'slack.com'
@@ -18,31 +18,19 @@ SLACK_API_ARGUMENTS_DEFAULT = {
     'as_user': 'chummybot',
 }
 
+RE_FIRST_CAP = re.compile('(.)([A-Z][a-z]+)')
+RE_ALL_CAP = re.compile('([a-z0-9])([A-Z])')
 
-def call_slack(slack_api_method, slack_api_arguments):
-    """ Call any Slack slack_api_method with these slack_api_arguments
+slack = slacker.Slacker(os.environ["CHUMMYBOT_API_TOKEN"])
 
-    Implementation must use httplib because we are sticking to Standard Library.
-    (For the sake of portability and AWS Lambda.)
 
-    :param slack_api_method: Corresponds to an Slack API Method from the subset of API Methods that
-        Bot Users are allowed to call: https://api.slack.com/bot-users
-    :type slack_api_method: str
-    :param slack_api_arguments: API Method arguments!
-        No really, this can be anything under "Arguments"
-        in the documentation for a given API method.
-        i.e. https://api.slack.com/methods/chat.postMessage
-        These are merged with (and override) some defaults.
-    :return: Response body from request to Slack, unmodified
-    :rtype: httplib.HTTPResponse
+def snake_case(s):
+    """ Convert CamelCase to snake_case. `slacker` library wants snake_case.
+
+    from http://stackoverflow.com/a/1176023/884640
     """
-    slack_api_method = slack_api_method.strip('/')
-    working_arguments = SLACK_API_ARGUMENTS_DEFAULT.copy()
-    working_arguments.update(slack_api_arguments.copy())
-    slack_api_arguments = working_arguments
-    relative_url = BASE_URL + slack_api_method
-    response = requests.get("https://" + HOST + relative_url, params=slack_api_arguments)
-    return response.json
+    s2 = RE_FIRST_CAP.sub(r'\1_\2', s)
+    return RE_ALL_CAP.sub(r'\1_\2', s2).lower()
 
 
 def lambda_handler(event, context):
@@ -59,13 +47,23 @@ def lambda_handler(event, context):
     '''
     print("Received event: " + json.dumps(event, indent=2))
 
-    api_method = event['slack_api_method']
-    api_arguments = event['slack_api_arguments']
+    api_method_path = event['slack_api_method']  # i.e. "chat.postMessage"
+    api_arguments = merge(SLACK_API_ARGUMENTS_DEFAULT, event['slack_api_arguments'])
 
     # TODO(hangtwenty) schema for another field, "chummybot_arguments" ...?
     # i.e. memory_channel
 
-    api_response = call_slack(api_method, api_arguments)
+    # this block "resolves" the string of the Slack API method,
+    # to a callable on the `slack` instance. i.e. for chat.postMessage, do
+    # >>> fun = slack | getattr('chat') | getattr('post_message')
+    # >>> fun(<the arguments for that API method>)
+    api_method_path_components = api_method_path.split('.')
+    fun = slack
+    for component_name in api_method_path_components:  # i.e. first "chat" then "postMessage"
+        component_name = snake_case(component_name)
+        fun = getattr(fun, component_name)
+
+    api_response = fun(**api_arguments)
 
     print("Received response from Slack: " + pprint.pformat(api_response, indent=2))
     return api_response
@@ -74,23 +72,17 @@ def always_failed_handler(event, context):
     raise Exception('I failed!')
 
 
-# if __name__ == "__main__":
-#     # for manual testing on my laptop
-#
-#     import os
-#     my_event = {
-#         "slack_api_method": "chat.postMessage",
-#         "slack_api_arguments": {
-#             "token" : os.environ["CHUMMYBOT_API_TOKEN"],
-#             "channel": "#friendlybotisfriendly",
-#             "as_user": "friendlybot",
-#             "text": "Hello from a Python script"
-#         }
-#     }
-#     # response = lambda_handler(my_event, {})
-#
-#     import requests
-#     requests.post(
-#         os.environ['CHUMMYBOT_API_GATEWAY_URL'])
-#
+if __name__ == "__main__":
+    # for manual testing on my laptop
 
+    import os
+
+    my_event = {
+        "slack_api_method": "chat.postMessage",
+        "slack_api_arguments": {
+            "channel": "#friendlybotisfriendly",
+            "as_user": "friendlybot",
+            "text": "Hello from a Python script"
+        }
+    }
+    response = lambda_handler(my_event, {})

@@ -16,6 +16,8 @@ PROJECT_DIR="$DIR/.."
 
 rm -i /tmp/chummybot-lambda.zip || true
 
+pip install -r $PROJECT_DIR/requirements.txt
+
 # copy all python files from the chummybot directory. (recursive)
 cd $PROJECT_DIR/chummybot/
 zip -r /tmp/chummybot-lambda.zip .
