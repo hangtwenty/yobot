@@ -1,7 +1,7 @@
 # chummybot
 
 chummybot introduces people to each other in Slack. 
-It can make connections across departments or geographies in your growing company.
+It can make connections across departments or geographies in your growing organization.
 
 # Why not [etsy/mixer][1]?
 
