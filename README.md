@@ -28,4 +28,4 @@ or keep that second directory up to date
 This was mainly because I wanted to play with AWS Lambda, but I like that this thing can be so low-maintenance!
 
 
-[etsy/mixer](https://codeascraft.com/2015/09/15/assisted-serendipity/)
+[etsy/mixer]: https://codeascraft.com/2015/09/15/assisted-serendipity/
