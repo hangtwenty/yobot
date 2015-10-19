@@ -1,6 +1,6 @@
-# chummybot
+# yobot
 
-chummybot introduces people to each other in Slack. 
+yobot introduces people to each other in Slack. 
 It can make connections across departments or geographies in your growing organization.
 
 # Why not [etsy/mixer][1]?
@@ -16,7 +16,7 @@ I decided to use
 
 Slack was a sensible choice for me, as my company uses Slack, and Slack has great APIs and bot support.
 If you like the idea but don't use Slack, I'll bet your (modern) chat service has the same features,
-so it wouldn't be hard to port chummybot!
+so it wouldn't be hard to port yobot!
 
 # Differences from [etsy/mixer][1]
 
