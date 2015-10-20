@@ -1,3 +1,2 @@
-funcy==1.6
-requests==2.8.1
 slacker==0.7.3
+funcy==1.6

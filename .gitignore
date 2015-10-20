@@ -1,3 +1,12 @@
+# Project specific
+
+# ignore .env -- that might contain sensitive stuff! only the example .env (.env.example) should be committed)
+.env
+
+#================#
+# Python general #
+#================#
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
