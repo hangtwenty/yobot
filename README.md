@@ -57,24 +57,26 @@ to broadcast to.
 
 ### Yobot side
 
-Take a look at `yobot_config_and_secrets.py` and `.env.example.` The idea is:
+Out of the box:
+
+    $ cp .env.example .env      # start from template
+    $ vim .env                  # edit config and put your secrets in
+    # source .env               # before you deploy or test.
+
+To `source .env` every time you `cd` into this directory,
+[use autoenv](https://github.com/kennethreitz/autoenv) (or [autoenv-zsh](https://github.com/kennethreitz/autoenv)).
+
+Full details ... Take a look at `yobot_config_and_secrets.py` and `.env.example.` The idea is:
 
 * `yobot_config_and_secrets.py` just gets its values from environment variables.
 This makes it easy to work with locally, without committing secrets to VCS.
 * There are several easy ways to manage these environment variables. Pick your fancy:
     * You make a script that sets the variables, and source it before testing or deploying.
       *Don't commit this to git.*
-        * I recommend you do `cp .env.example .env` to make your own, then activate it
-        by doing `source .env` or [using autoenv](https://github.com/kennethreitz/autoenv) (or [autoenv-zsh](https://github.com/kennethreitz/autoenv))
-        ... this is very convenient :) The `.gitignore` ignores the `.env` file.
     * Pass them as arguments. i.e. `YOBOT_BOTUSER_TOKEN=blah YOBOT_BLAH=foobar ./scripts/deploy.sh`
     * Define them in a `~/.bashrc`.
     * If you don't want environment variables at all, just modify your local
         `yobot_config_and_secrets.py` directly and hardcode the values. *Don't commit this to git.*
-
-(Seem weird?
-If you think it's weird to put this config in a Python file, please open an Issue or submit a PR.
-I did this for maximum flexibility, while also being clean/simple for AWS Lambda deployment.
 
 ## Test it out locally
 
