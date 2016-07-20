@@ -4,7 +4,7 @@ Yobot is a chatbot that introduces people to each other. It's an easy way to mak
 in your growing organization.
  
 Yobot is implemented for Slack and ready to 
-deploy with AWS Lambda. Low or maintenance. Likely no cost.
+deploy with AWS Lambda. Low or no maintenance. Likely no cost.
 
 Yobot is an easy way to connect people.
 Now, it's nothing revolutionary. It is simple [and unoriginal][1].
@@ -20,9 +20,7 @@ name, username, and an icebreaker prompt. Then you can send them a message, or n
 Also, nobody sees that you've used Yobot. Easy, and no-pressure. There are more commands,
 see below.
 
-TODO SCREENCAST-GIF-THING. picture is worth a thousand words.
-(But TEMPORARILY FORCE USER to be restricted to a volunteer who is OK with me
-capturing their name and putting it on the net ...)
+TODO: add a screencast gif here
 
 ## Batteries included
 
