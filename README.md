@@ -1,3 +1,7 @@
+Warning: this was a quick project, and it is not being maintained. I think it was a fun idea. Left here as an idea, not a ready-to-use thing.
+
+----
+
 # Yobot
 
 Yobot is a chatbot that introduces people to each other. It's an easy way to make connections
@@ -136,6 +140,8 @@ Here are detailed instructions - but don't be intimidated, *it's easy*.
 
 The idea is that you put Yobot in AWS Lambda behind an API Gateway. (TODO add links to normal
 documentation, as well as link to that helpful Fugue blog post.)
+
+**UPDATE:** better ways to deploy (Python) to AWS Lambda have emerged. [kappa](https://github.com/garnaat/kappa) or [lambda-uploader](https://github.com/rackerlabs/lambda-uploader) especially. Those are probably better options.
 
 #### Prereqs:
 
