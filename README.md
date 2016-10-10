@@ -147,7 +147,7 @@ _**[This can be done very easily with Flask/Zappa, see Issue #1](https://github.
 
 #### Manual, one-time setup with AWS Lambda
 
-_[Until we replace this after doing Issue #1](https://github.com/hangtwenty/yobot/issues/1)**_
+_[Holdover, until we replace this after addressing Issue #1.](https://github.com/hangtwenty/yobot/issues/1)_
 
 #### Deployment script
 
@@ -181,4 +181,4 @@ function in `slack_logic.py`. It'll take it all from there.
 
 # Plans
 
-See Issues.
+See [Issues](https://github.com/hangtwenty/yobot/issues)
