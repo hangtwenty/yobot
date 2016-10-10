@@ -3,6 +3,9 @@
 # ignore .env -- that might contain sensitive stuff! only the example .env (.env.example) should be committed)
 .env
 
+.virtualenv
+.idea
+
 #================#
 # Python general #
 #================#

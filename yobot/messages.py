@@ -7,6 +7,7 @@ and pull requests are welcome :)
 """
 import random
 
+# TODO(hangtwenty) move messages into static files, maybe internationalization-ready
 GREETINGS = [
     u"Howdy!",
     u"Hey there!",
@@ -14,7 +15,7 @@ GREETINGS = [
     u"Hey champ."
 ]
 THINGS_TO_DO = [
-    # TODO(hangtwenty) replace all emojis with :blah: equivalents.
+    # TODO(hangtwenty) replace all emojis with :blah: equivalents (?) but that's chat-provider specific...
     # Slack does this automatically but it would be easier to read to just use that here too.
     u'Grab coffee ☕️',
     u'Maybe you should grab coffee ☕️',
@@ -92,6 +93,18 @@ def generate_random_introduction_text(
             punctuation=random.choice(['!', '.']),
             emoji_msg=random.choice(['', random.choice(EMOJI_MSG)]),
             prompt=random.choice(['', random.choice(PROMPTS)]),
-            introduce_username=introduce_username,
         )
     return msg
+
+
+def get_introduction_message():
+    return (
+        "*Hello!* I'm yobot. I introduce people to each other. :smiley: \n\n"
+        "Want to try? *Type _/yobot_ anywhere in Slack.* "
+        "Nobody else will see that you've typed /yobot, the command goes straight to me. "
+        "It's silent. "
+        "I'll choose another person who has Slack, randomly. "
+        "Then I'll send *you* a private message with their name. "
+        "I'll give you an idea to break the ice. :coffee: :beers: :computer: "
+        "It's just for you, and there's no pressure to follow up. \n\n"
+        "Try it! *Type _/yobot_ and meet someone new.*\n")
