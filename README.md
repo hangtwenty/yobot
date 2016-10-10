@@ -1,4 +1,6 @@
-Warning: this was a quick project, and it is not being maintained. I think it was a fun idea. Left here as an idea, not a ready-to-use thing.
+## This is an old Hackathon project
+
+This was a quick project, currently unmaintained. I think it was a fun idea though!
 
 ----
 
@@ -24,7 +26,7 @@ name, username, and an icebreaker prompt. Then you can send them a message, or n
 Also, nobody sees that you've used Yobot. Easy, and no-pressure. There are more commands,
 see below.
 
-TODO: add a screencast gif here
+_`<place neat gif here>`_
 
 ## Batteries included
 
@@ -39,9 +41,8 @@ Contains deployment script, with instructions in this README, to set up as an AW
  But Yobot is designed to respond on demand. It doesn't introduce people on a schedule,
  so a repeat isn't really annoying. Put yourself in the end-user's shoes: 
  if you already know the person, you can just call `/yobot` again and get another introduction.
-* **No server.**
-* Take a look at AWS Lambda's pricing. Only one request is needed each time someone uses
-Yobot. Since you will probably not use Yobot more than a million times in a month, it
+* **Function as a Service.** (No need to have an idle server running.)
+* Take a look at [AWS Lambda's pricing](https://aws.amazon.com/lambda/pricing/). Only one request is needed each time someone uses Yobot. Since you will probably not use Yobot more than a million times in a month, it
 will probably be free for you to run. Since AWS Lambda removes the need for you to maintain
 a server, there is no server you need to keep running.
 
@@ -55,7 +56,7 @@ please submit a Pull Request and we'll have it out-of-the-box ;)
 and bot support. If you want an introduction-bot Slack,
 I'll bet your (modern) chat service has the same API features,
 so it wouldn't be hard to port Yobot :) Please let me know if you port it,
-and maybe we can merge efforts and make Yobot backend-agnostic!
+and maybe we can merge efforts and make Yobot backend-agnostic! _[Issue #4: Refactor for pluggable backend.](https://github.com/hangtwenty/yobot/issues/4)_
 
 
 # Inspired by [etsy/mixer][1], but it's different
@@ -91,17 +92,13 @@ Clearly an inspiring one!
 
 # Setup
 
-TODO this all needs another pass
+_[We should change the execution model to Flask/Zappa, and do something fairly common/conventional for handling the configuration... things are too custom right now, because when this Hackathon happened, Lambda was pretty new. Plus it was Hackathon. See Issue #1.](https://github.com/hangtwenty/yobot/issues/1)_
 
 ## Configuration
 
 ### Slack side
 
-TODO. Need to review it all and document. Screenshots would be nice.
-
-MEMO ... don't forget step: to use the `/yobot broadcast` functionality or "post to public channel
-on a schedule", Yobot MUST be MANUALLY invited (by a human) to the public channel you want her
-to broadcast to.
+Configuration on the Slack side is like most Slackbots ... but ... I should still document -- _[Issue #8](https://github.com/hangtwenty/yobot/issues/8)_
 
 ### Yobot side
 
@@ -138,22 +135,19 @@ Right now the best way is:
 
 Here are detailed instructions - but don't be intimidated, *it's easy*.
 
-The idea is that you put Yobot in AWS Lambda behind an API Gateway. (TODO add links to normal
-documentation, as well as link to that helpful Fugue blog post.)
+The idea is that you put Yobot in AWS Lambda behind an API Gateway.
 
-**UPDATE:** better ways to deploy (Python) to AWS Lambda have emerged. [kappa](https://github.com/garnaat/kappa) or [lambda-uploader](https://github.com/rackerlabs/lambda-uploader) especially. Those are probably better options.
+_**[This can be done very easily with Flask/Zappa, see Issue #1](https://github.com/hangtwenty/yobot/issues/1)**_
 
 #### Prereqs:
 
-1. An AWS account (TODO add link.)
+1. An AWS account
 2. Permissions to configure your AWS Account to add 1 AWS Lambda function and 1 AWS API Gateway.
-3. The AWS CLI, up to date. (TODO add link.)
+3. The AWS CLI, up to date.
 
 #### Manual, one-time setup with AWS Lambda
 
-TODO add step by step guide with screenshots.
-
-(PR welcome if someone wants to automate this.)
+_[Until we replace this after doing Issue #1](https://github.com/hangtwenty/yobot/issues/1)**_
 
 #### Deployment script
 
@@ -187,4 +181,4 @@ function in `slack_logic.py`. It'll take it all from there.
 
 # Plans
 
-See TODO.md.
+See Issues.
