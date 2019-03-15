@@ -46,18 +46,9 @@ Contains deployment script, with instructions in this README, to set up as an AW
 will probably be free for you to run. Since AWS Lambda removes the need for you to maintain
 a server, there is no server you need to keep running.
 
-### Doesn't match your stack? Let's talk
+### Want to integrate with something besides Slack?
 
-**Don't want to use AWS Lambda?** It won't be hard to run Yobot the conventional way,
-as a simple server (Flask would be a great choice). If you wind up writing this,
-please submit a Pull Request and we'll have it out-of-the-box ;)
-
-**Slack was a sensible choice for me,** as my company uses Slack, and Slack has excellent APIs 
-and bot support. If you want an introduction-bot Slack,
-I'll bet your (modern) chat service has the same API features,
-so it wouldn't be hard to port Yobot :) Please let me know if you port it,
-and maybe we can merge efforts and make Yobot backend-agnostic! _[Issue #4: Refactor for pluggable backend.](https://github.com/hangtwenty/yobot/issues/4)_
-
+Feel free to submit a PR.
 
 # Inspired by [etsy/mixer][1], but it's different
 
